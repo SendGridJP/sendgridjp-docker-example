@@ -41,7 +41,7 @@ RUN apt-get install -y php5 curl libcurl3 php5-curl
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv /composer.phar /usr/local/bin/
 RUN mkdir /root/php
-RUN git clone https://github.com/awwa/sendgridjp-php-example
+RUN git clone https://github.com/sendgridjp/sendgridjp-php-example
 RUN mv /sendgridjp-php-example /root/php
 RUN cd /root/php/sendgridjp-php-example;/usr/local/bin/composer.phar install
 

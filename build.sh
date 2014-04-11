@@ -1,2 +1,2 @@
-docker build -t awwa/sendgrid-example-jp .
+docker build -t sendgridjp/sendgridjp-example .
 
