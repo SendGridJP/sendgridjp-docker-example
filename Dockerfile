@@ -79,14 +79,6 @@ RUN mv /sendgridjp-python-example /root/python
 # for Ruby
 RUN curl -sSL https://get.rvm.io | bash -s stable --ruby
 RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
-#RUN /bin/bash /usr/local/rvm/scripts/rvm;gem install bundler
-#RUN source /usr/local/rvm/scripts/rvm
-#RUN apt-get install -y python-software-properties
-#RUN add-apt-repository -y ppa:brightbox/ruby-ng
-#RUN apt-get update
-#RUN apt-get install -y ruby2.1
-#ADD files/.gemrc /root/.gemrc
-#RUN source /usr/local/rvm/scripts/rvm;gem install bundler
 #
 # Get sample code
 RUN mkdir /root/ruby
