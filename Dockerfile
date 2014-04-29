@@ -85,3 +85,19 @@ RUN mkdir /root/ruby
 RUN git clone http://github.com/sendgridjp/sendgridjp-ruby-example.git
 RUN mv /sendgridjp-ruby-example /root/ruby
 RUN cd /root/ruby/sendgridjp-ruby-example ; /bin/bash -l -c "bundle install"
+
+#
+# for Go
+RUN wget https://go.googlecode.com/files/go1.2.1.linux-amd64.tar.gz
+RUN tar -C /usr/local -xzf go1.2.1.linux-amd64.tar.gz
+RUN echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile
+RUN echo 'export GOROOT=/usr/local/go' >> /root/.profile
+#
+# Get sample code
+RUN mkdir /root/go
+RUN git clone http://github.com/sendgridjp/sendgridjp-go-example.git
+RUN mv /sendgridjp-go-example /root/go
+RUN echo 'export GOPATH=/root/go/sendgridjp-go-example' >> /root/.profile
+ENV PATH $PATH:/usr/local/go/bin
+ENV GOROOT /usr/local/go
+ENV GOPATH /root/go/sendgridjp-go-example
