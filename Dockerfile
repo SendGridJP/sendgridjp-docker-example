@@ -108,8 +108,22 @@ ENV GOPATH /root/go/sendgridjp-go-example
 
 #
 # for Perl
-RUN apt-get install -y perlbrew
+RUN apt-get install -y perlbrew libmodule-install-perl
 RUN perlbrew init
-RUN echo source ~/perl5/perlbrew/etc/bashrc >> /root/.profile
-RUN perlbrew install-cpanm
+RUN echo source /perl5/perlbrew/etc/bashrc >> /etc/profile
+RUN echo export PATH=$PATH:/perl5/perlbrew/bin >> /etc/profile
+#RUN perlbrew install-cpanm
 RUN /bin/bash -l -c "perlbrew install-cpanm"
+#
+# Get sendgrid module
+RUN mkdir /root/perl
+WORKDIR /root/perl
+RUN git clone https://github.com/sendgrid/sendgrid-perl.git
+WORKDIR /root/perl/sendgrid-perl
+RUN cpanm SendGrid-1.0.tar.gz
+RUN perl Makefile.PL
+RUN make
+#
+# Get sample code
+WORKDIR /root/perl
+RUN git clone http://github.com/sendgridjp/sendgridjp-perl-example.git
