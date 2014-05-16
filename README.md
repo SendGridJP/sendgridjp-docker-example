@@ -7,11 +7,11 @@ This project includes the Dockerfile for creating the environment to run SendGri
 これを利用することで簡単に各種プログラミング言語のライブラリ実行環境を構築することができます。  
 
 # Programming languages
-## go
-## node.js
-## php
-## python
-## ruby
+* go
+* node.js
+* php
+* python
+* ruby
 
 # Usage
 
