@@ -15,12 +15,22 @@ This project includes the Dockerfile for creating the environment to run SendGri
 
 # Usage
 
+## Building image
 ```bash
 git clone https://github.com/SendGridJP/sendgridjp-docker-example.git
 cd sendgridjp-docker-example
 cp .env.example .env
 # .envファイルを編集してください
 ./build.sh
+```
+
+## Sending Email
+```bash
+./send.sh
+```
+
+## ssh
+```bash
 ./run.sh
 ./ssh.sh
 ```
