@@ -61,7 +61,6 @@ RUN apt-get install -y nodejs
 RUN mkdir /root/nodejs
 WORKDIR /root/nodejs 
 RUN git clone http://github.com/sendgridjp/sendgridjp-nodejs-example.git
-#RUN cd /root/nodejs/sendgridjp-nodejs-example;npm install
 WORKDIR /root/nodejs/sendgridjp-nodejs-example 
 RUN npm install
 

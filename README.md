@@ -8,7 +8,7 @@ This project includes the Dockerfile for creating the environment to run SendGri
 
 # Programming languages
 ## go
-## node.js
+## Node.js
 ## php
 ## python
 ## ruby
