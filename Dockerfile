@@ -48,6 +48,7 @@ WORKDIR /root/php
 RUN git clone https://github.com/sendgridjp/sendgridjp-php-example
 WORKDIR /root/php/sendgridjp-php-example 
 RUN /usr/local/bin/composer.phar install
+ADD ./.env /root/php/sendgridjp-php-example/.env
 
 #
 # for node.js
@@ -63,6 +64,7 @@ WORKDIR /root/nodejs
 RUN git clone http://github.com/sendgridjp/sendgridjp-nodejs-example.git
 WORKDIR /root/nodejs/sendgridjp-nodejs-example 
 RUN npm install
+ADD ./.env /root/nodejs/sendgridjp-nodejs-example/.env
 
 #
 # for python
@@ -76,6 +78,10 @@ RUN pip install sendgrid
 # Get sample code
 WORKDIR /root/python 
 RUN git clone http://github.com/sendgridjp/sendgridjp-python-example.git
+WORKDIR /root/python/sendgridjp-python-example 
+RUN pip install sendgrid
+RUN pip install dotenv
+ADD ./.env /root/python/sendgridjp-python-example/.env
 
 #
 # for Ruby
@@ -88,11 +94,14 @@ WORKDIR /root/ruby
 RUN git clone http://github.com/sendgridjp/sendgridjp-ruby-example.git
 WORKDIR /root/ruby/sendgridjp-ruby-example 
 RUN /bin/bash -l -c "bundle install"
+ADD ./.env /root/ruby/sendgridjp-ruby-example/.env
 
 #
 # for Go
+WORKDIR /root
 RUN wget https://go.googlecode.com/files/go1.2.1.linux-amd64.tar.gz
 RUN tar -C /usr/local -xzf go1.2.1.linux-amd64.tar.gz
+RUN rm go1.2.1.linux-amd64.tar.gz
 RUN echo 'export PATH=$PATH:/usr/local/go/bin' >> /etc/profile
 RUN echo 'export GOROOT=/usr/local/go' >> /root/.profile
 #
@@ -104,4 +113,9 @@ RUN echo 'export GOPATH=/root/go/sendgridjp-go-example' >> /root/.profile
 ENV PATH $PATH:/usr/local/go/bin
 ENV GOROOT /usr/local/go
 ENV GOPATH /root/go/sendgridjp-go-example
+WORKDIR /root/go/sendgridjp-go-example 
+RUN go get github.com/sendgrid/sendgrid-go
+RUN go get github.com/joho/godotenv
+RUN go install main
+ADD ./.env /root/go/sendgridjp-go-example/.env
 
