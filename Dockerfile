@@ -4,7 +4,7 @@
 #
 # use the ubuntu base image provided by dotCloud
 #
-FROM ubuntu
+FROM ubuntu:10.04
 MAINTAINER awwa, awwa500@gmail.com
 
 #
@@ -33,6 +33,11 @@ EXPOSE 22
 # for general
 #
 RUN apt-get install -y language-pack-ja
+RUN apt-get install -y --force-yes perl-base=5.14.2-6ubuntu2
+RUN apt-get install -y perl
+RUN apt-get install -y libswitch-perl
+RUN apt-get install -y perl-modules
+RUN apt-get install -y liberror-perl
 RUN apt-get install -y git
 
 #
@@ -52,14 +57,16 @@ ADD ./.env /root/php/sendgridjp-php-example/.env
 
 #
 # for node.js
-RUN apt-get update
-RUN apt-get install -y python-software-properties
-RUN add-apt-repository -y ppa:chris-lea/node.js
-RUN apt-get update
-RUN apt-get install -y nodejs
+RUN apt-get install -y g++ build-essential
+RUN mkdir /root/nodejs
+WORKDIR /root/nodejs 
+RUN wget http://nodejs.org/dist/v0.11.13/node-v0.11.13.tar.gz
+RUN tar zxvf node-v0.11.13.tar.gz
+WORKDIR /root/nodejs/node-v0.11.13
+RUN ./configure
+RUN make install
 #
 # Get sample code
-RUN mkdir /root/nodejs
 WORKDIR /root/nodejs 
 RUN git clone http://github.com/sendgridjp/sendgridjp-nodejs-example.git
 WORKDIR /root/nodejs/sendgridjp-nodejs-example 
@@ -85,11 +92,18 @@ ADD ./.env /root/python/sendgridjp-python-example/.env
 
 #
 # for Ruby
-RUN curl -sSL https://get.rvm.io | bash -s stable --ruby
-RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
+RUN apt-get install -y zlib1g-dev libssl-dev
+RUN mkdir /root/ruby
+WORKDIR /root/ruby
+RUN wget http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.2.tar.gz
+RUN tar zxvf ruby-2.1.2.tar.gz
+WORKDIR /root/ruby/ruby-2.1.2
+RUN ./configure
+RUN make install
+#RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
+RUN gem install bundler
 #
 # Get sample code
-RUN mkdir /root/ruby
 WORKDIR /root/ruby 
 RUN git clone http://github.com/sendgridjp/sendgridjp-ruby-example.git
 WORKDIR /root/ruby/sendgridjp-ruby-example 
