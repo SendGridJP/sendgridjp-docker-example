@@ -12,6 +12,7 @@ This project includes the Dockerfile for creating the environment to run SendGri
 * php
 * python
 * ruby
+* java
 
 # Usage
 
